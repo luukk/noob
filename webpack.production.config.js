@@ -16,7 +16,6 @@ var definePlugin = new webpack.DefinePlugin({
 module.exports = {
     entry: {
         app: ["babel-polyfill", path.resolve(__dirname, "src/main.js")],
-        vendor: ["phaser", "webfontloader"]
     },
     output: {
         path: path.resolve(__dirname, "build"),
