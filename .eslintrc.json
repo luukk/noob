@@ -1,0 +1,17 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["standard", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "import/no-unresolved": [2]
+  },
+  "settings": {
+    "import/core-modules": ["pixi", "p2"]
+  }
+}

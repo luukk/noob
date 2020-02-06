@@ -1,0 +1,9 @@
+{
+    "short_name": "NOOB client",
+    "name": "NOOB client",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "theme_color": "#ffffff",
+    "background_color": "#000000",
+    "description": "NOOB client."
+}
