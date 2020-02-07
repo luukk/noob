@@ -6,15 +6,38 @@ const io = require("socket.io").listen(server);
 io.on("connection", socket => {
     console.log("a user connected", socket.id);
 
-    socket.on("register", data => {
-        const { name, country} = data;
-        const roomName = name.concat(country);
+    socket.on("register", registerInformation => {
+        socket.bankInfo = registerInformation;
+        const { country } = registerInformation;
 
-        console.log('register called', typeof name, country);
-        
-        socket.join(roomName);
-        
-        console.log("rooms", io.sockets.adapter.rooms);
+        socket.join(country, error => {
+            if(error !== null){                
+                return socket.emit('response', { code :'400', message: "unsuccesfull registration" }); //error registering to room
+            }
+            
+            return socket.emit('response', { code :'201', message: "succesfull registration" }); //register successfull
+        });
+
+    })
+
+    socket.on("withdraw", socket => {
+        const getAllClientsInRoom = (error, clients) => {
+            if(error) {
+                console.log("error", error)
+            }
+
+            return clients;
+        }
+
+        const findClientById = id => {
+            return clients.find( id => {
+                const bankId = io.sockets.connected[id].id
+                return bankId == id
+            })
+            .bankInfo
+        }
+
+        io.of('/').in('Netherlands').clients(test);
     })
 
     socket.on("disconnect", function() {
