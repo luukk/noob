@@ -44,6 +44,7 @@
     "dependencies": {
         "express": "^4.16.4",
         "idiom.js": "^1.0.0",
+        "schema-validator": "^3.3.1",
         "socket.io": "^2.1.1",
         "socket.io-client": "^2.1.1"
     }

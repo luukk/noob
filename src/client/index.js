@@ -9,11 +9,23 @@ class Client {
             country
         }
     }
-    connect() {
 
+    connect() {
+        console.log('connect')
         this.socket = io("http://localhost:8080");
 
         this.socket.emit('register', this.registerSchema)
+
+        this.socket.on('response', function(data) {
+            console.log('received by node: ', data)
+        })
+        
+    }
+
+    withdraw(receiveBankName, receiveBankCountry, amount) {
+        const schema = { receiveBankName, receiveBankCountry, amount}
+
+        this.socket.emit('withdraw', schema);
     }
 }
 
