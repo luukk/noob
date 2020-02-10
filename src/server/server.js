@@ -2,11 +2,13 @@ const express = require("express");
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io").listen(server);
+const middleware = require('./middleware')
 const messages = require('./messages')
-// import { registerSchemas } from "schemas";
 
 io.on("connection", socket => {
     console.log("a user connected", socket.id);
+
+    middleware(socket); //middleware handler
 
     socket.on("register", registerInformation => {
         socket.bankInfo = registerInformation;

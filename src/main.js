@@ -7,8 +7,8 @@ const client3 = new Client("ing", "Netherlands");
 class Yeet {
     constructor() {
         client1.connect();
-        client2.connect();
-        client1.withdraw('yoink', 'Germany', 20);
+        // client2.connect();
+        // client1.withdraw('yoink', 'Germany', 20);
     }
 }
 

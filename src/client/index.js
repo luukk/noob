@@ -19,6 +19,11 @@ class Client {
         this.socket.on('response', function(data) {
             console.log('received by node: ', data)
         })
+
+        this.socket.on('error', function(err) {
+            console.log(err)
+            // alert(JSON.stringify(err, null, 4));
+        })
         
     }
 
