@@ -10,8 +10,11 @@ io.on("connection", socket => {
 
     middleware(socket); //middleware handler
 
+    /**
+     * Socket handler for country registration
+     */
     socket.on("register", registerInformation => {
-        socket.bankInfo = registerInformation;
+        socket.countryInfo = registerInformation;
         const { country } = registerInformation;
         const { registerSucces, registerFailed } = messages.register
 
@@ -56,7 +59,7 @@ io.on("connection", socket => {
     });
 });
 
-app.set("port", 8080);
+app.set("port", 8085);
 server.listen(app.get("port"), function() {
     console.log(`Listening on ${server.address().port}`);
 });

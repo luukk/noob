@@ -5,14 +5,13 @@ class Client {
         console.log('constructor called');
         
         this.registerSchema = {
-            name,
             country
         }
     }
 
     connect() {
         console.log('connect')
-        this.socket = io("http://localhost:8080");
+        this.socket = io("http://localhost:8085");
 
         this.socket.emit('register', this.registerSchema)
 

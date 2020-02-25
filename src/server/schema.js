@@ -1,13 +1,5 @@
 const schema = {
     register: {
-        name: {
-            type: String,
-            required: true,
-            length: {
-                min: 1,
-                max: 50
-            }          
-        },
         country: {
             type: String,
             required: true,
