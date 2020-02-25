@@ -13,12 +13,17 @@ io.on("connection", socket => {
     /**
      * Socket handler for country registration
      */
-    socket.on("register", registerInformation => {
-        socket.countryInfo = registerInformation;
-        const { country } = registerInformation;
-        const { registerSucces, registerFailed } = messages.register
-
+    socket.on("register", ({ country }) => {
+        socket.countryInfo = country;
+        const { registerSucces, registerFailed, alreadyRegistered } = messages.register
+    
         socket.join(country, error => {
+            const poolSize = io.sockets.adapter.rooms[country];
+
+            if(poolSize.length > 1) {
+                socket.leave(country);
+                return socket.emit('response', alreadyRegistered);
+            }
             if(error !== null){                
                 return socket.emit('response', registerFailed); //error registering to room
             }

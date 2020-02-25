@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 
 class Client {
-    constructor(name, country) {
+    constructor(country) {
         console.log('constructor called');
         
         this.registerSchema = {
