@@ -33,30 +33,11 @@ io.on("connection", socket => {
 
     })
 
-    socket.on("withdraw", socket => {
-        const { receiveBankName, receiveBankCountry, amount } = socket
-        let foundClients = [];
-
-        const getAllClientsInRoom = (error, clients) => {
-            if(error) {
-                console.log("error", error)
-            }
-            console.log(clients)
-            foundClients = clients;
-            return clients;
-        }
-        
-        const clients = io.of('/').in('Germany').clients(getAllClientsInRoom);
-
-        const findClientById = id => {
-            return clients.find( id => {
-                const bankId = io.sockets.connected[id].id
-                return bankId == id
-            })
-            .bankInfo
-        }
-
-        console.log("clients", foundClients)
+    socket.on("withdraw", withdrawBody => {
+        const { receiveCountry } = withdrawBody
+ 
+        socket.to(receiveCountry).emit('response', withdrawBody)
+ 
     })
 
     socket.on("disconnect", function() {

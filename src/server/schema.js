@@ -18,17 +18,13 @@ const schema = {
                 max: 50
             }          
         },
-        receiveBankCountry: {
+        receiveCountry: {
             type: String,
             required: true,
             length: {
                 min: 1,
                 max: 50
             }          
-        },
-        amount: {
-            type: Number,
-            required: true
         }
     }
 };

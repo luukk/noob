@@ -19,6 +19,10 @@ class Client {
             console.log('received by node: ', data)
         })
 
+        this.socket.on('message', function(data) {
+            console.log('withdraw by node: ', data)
+        })
+
         this.socket.on('error', function(err) {
             console.log(err)
             // alert(JSON.stringify(err, null, 4));
@@ -26,10 +30,14 @@ class Client {
         
     }
 
-    withdraw(receiveBankName, receiveBankCountry, amount) {
-        const schema = { receiveBankName, receiveBankCountry, amount}
+    withdraw(receiveBankName, receiveCountry, amount) {
+        const schema = { receiveBankName, receiveCountry, amount }
+        schema.action = "withdraw"
 
         this.socket.emit('withdraw', schema);
+        this.socket.on('message', function(data) {
+            console.log('withdraw by node: ', data)
+        })
     }
 }
 
