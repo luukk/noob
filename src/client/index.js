@@ -16,12 +16,15 @@ class Client {
         this.socket.emit('register', this.registerSchema)
 
         this.socket.on('response', function(data) {
-            console.log('here is recieved by node')
             console.log('received by node: ', data)
         })
 
-        this.socket.on('message', function(data) {
+        this.socket.on('withdraw', function(data) {
             console.log('withdraw by node: ', data)
+        })
+
+        this.socket.on('balance', function(data) {
+            console.log('balance quest by node: ', data)
         })
 
         this.socket.on('error', function(err) {

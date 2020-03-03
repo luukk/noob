@@ -35,13 +35,13 @@ io.on("connection", socket => {
 
     socket.on("withdraw", withdrawBody => {
         const { receiveCountry } = withdrawBody
-        socket.to(receiveCountry).emit('response', withdrawBody)
+        socket.to(receiveCountry).emit('withdraw', withdrawBody)
  
     })
 
     socket.on("balance", balanceBody => {
         const { receiveCountry } = balanceBody
-        socket.to(receiveCountry).emit('response', balanceBody)
+        socket.to(receiveCountry).emit('balance', balanceBody)
  
     })
 
