@@ -8,13 +8,17 @@ const messages = require('./messages')
 io.on("connection", socket => {
     console.log("a user connected", socket.id);
 
-    middleware(socket); //middleware handler
+    // Write middleware to decrypt
+    middleware(socket); // middleware handler
 
     /**
      * Socket handler for country registration
      */
-    socket.on("register", ({ country }) => {
-        socket.countryInfo = country;
+    socket.on("register", (registerBody) => {
+        console.log("Test2")
+        console.log(registerBody)
+        const {country} = registerBody
+        socket.countryInfo = country
         const { registerSucces, registerFailed, alreadyRegistered } = messages.register
     
         socket.join(country, error => {
@@ -25,10 +29,10 @@ io.on("connection", socket => {
                 return socket.emit('response', alreadyRegistered);
             }
             if(error !== null){                
-                return socket.emit('response', registerFailed); //error registering to room
+                return socket.emit('response', registerFailed); // error registering to room
             }
             
-            return socket.emit('response', registerSucces); //register successfull
+            return socket.emit('response', registerSucces); // register successfull
         });
 
     })
@@ -37,7 +41,6 @@ io.on("connection", socket => {
         const { receiveCountry } = withdrawBody
  
         socket.to(receiveCountry).emit('response', withdrawBody)
- 
     })
 
     socket.on("disconnect", function() {

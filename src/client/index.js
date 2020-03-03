@@ -1,19 +1,25 @@
 import io from "socket.io-client";
+const crypto = require('crypto')
 
 class Client {
-    constructor(country) {
+    constructor(country, publicKeyNoob) {
         console.log('constructor called');
         
+        this.publicKeyNoob = publicKeyNoob
+
         this.registerSchema = {
             country
         }
+
+        this.encryptedRegistration = Buffer.from(String(this.registerSchema), "base64")
+        crypto.publicEncrypt(this.publicKeyNoob, this.encryptedRegistration)
     }
 
     connect() {
         console.log('connect')
         this.socket = io("http://localhost:8085");
 
-        this.socket.emit('register', this.registerSchema)
+        this.socket.emit('register', this.encryptedRegistration)
 
         this.socket.on('response', function(data) {
             console.log('received by node: ', data)
@@ -27,7 +33,6 @@ class Client {
             console.log(err)
             // alert(JSON.stringify(err, null, 4));
         })
-        
     }
 
     withdraw(receiveBankName, receiveCountry, amount) {

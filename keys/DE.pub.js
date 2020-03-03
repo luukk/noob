@@ -1,0 +1,15 @@
+const key = `-----BEGIN RSA PUBLIC KEY-----
+MIICCgKCAgEAqqV3WsdeR3ABO1xm//h7EsIZNHOWVGW1iuQYu10SsJzAp2tWo9CW
+HqnNfxfpOZdbwy8Xp/b9JNOS+8enCn50knw2AZYe8lGX4RQphNUn1WCBD61INno+
+VUhuMPVQbva1xnpbTK9cWytneCaLMNWVRrpGrYuQHnbLo+Lal6bUE1O/lffVZhq9
+khsXpY7khw9fmm1jqZMXyyWXihni0+hj9zBIPtLCgnO92wFocpmxAdOoAhBNmHBP
+hHKauiNc+Grlw9oXiZhN+JHarxY+il9zIWWljFnPxstcASw8LyAmBEyLAN82SUfs
+wPrgwNrB/1KfBgVpMc70IvrwuDOZNwTJjjlvZgDLhZD/wYHQ9hhnZp2GB+TjtCn7
+zf/iaTMvl90lxcD2ff6dXIwLT0aCmD2B+vAxFOBUb4+SVDt3GF5Hg8OiD4c4M49V
+uDglcg9deULGU3CQkefG6jxvpLq47x7f8SM4/wpfXryK4N5gbXJx9hNQMsXo72yr
+1dUYwNGGsk5NW0rg6k6V6W+SA/0gQcRWETgchfWzg0d+CUuq9cguAEthWV98y77Q
+fTf8adpVrQxofDuydjN/Akq3gNEjPk/26t5OUodPCyMTXvG5pfBMCquw58ccYrr9
+zw6cmEypogTrZm7mLPkNcRS3I+VvhNUaJGcRSbGHBBIlHrxansrgKbECAwEAAQ==
+-----END RSA PUBLIC KEY-----`
+
+export default key
