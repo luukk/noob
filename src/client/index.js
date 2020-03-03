@@ -16,6 +16,7 @@ class Client {
         this.socket.emit('register', this.registerSchema)
 
         this.socket.on('response', function(data) {
+            console.log('here is recieved by node')
             console.log('received by node: ', data)
         })
 
@@ -37,6 +38,16 @@ class Client {
         this.socket.emit('withdraw', schema);
         this.socket.on('message', function(data) {
             console.log('withdraw by node: ', data)
+        })
+    }
+
+    balance(receiveBankName, receiveCountry) {
+        const schema = { receiveBankName, receiveCountry }
+        schema.action = "balance"
+
+        this.socket.emit('balance', schema);
+        this.socket.on('message', function(data) {
+            console.log('balance asked: ', data)
         })
     }
 }
