@@ -39,6 +39,12 @@ io.on("connection", socket => {
  
     })
 
+    socket.on("deposit", withdrawBody => {
+        const { receiveCountry } = depositBody
+        socket.to(receiveCountry).emit('deposit', depositBody)
+ 
+    })
+
     socket.on("balance", balanceBody => {
         const { receiveCountry } = balanceBody
         socket.to(receiveCountry).emit('balance', balanceBody)
