@@ -13,7 +13,8 @@ io.on("connection", socket => {
     /**
      * Socket handler for country registration
      */
-    socket.on("register", ({ country }) => {
+    socket.on("register", registerbody => {
+        const { country } = registerbody.header
         socket.countryInfo = country;
         const { registerSucces, registerFailed, alreadyRegistered } = messages.register
     
@@ -34,21 +35,18 @@ io.on("connection", socket => {
     })
 
     socket.on("withdraw", withdrawBody => {
-        const { receiveCountry } = withdrawBody
+        const { receiveCountry } = withdrawBody.header        
         socket.to(receiveCountry).emit('withdraw', withdrawBody)
- 
     })
 
-    socket.on("deposit", withdrawBody => {
-        const { receiveCountry } = depositBody
+    socket.on("deposit", depositBody => {
+        const { receiveCountry } = depositBody.header
         socket.to(receiveCountry).emit('deposit', depositBody)
- 
     })
 
     socket.on("balance", balanceBody => {
-        const { receiveCountry } = balanceBody
+        const { receiveCountry } = balanceBody.header
         socket.to(receiveCountry).emit('balance', balanceBody)
- 
     })
 
     socket.on("disconnect", function() {

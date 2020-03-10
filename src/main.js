@@ -9,7 +9,7 @@ class Yeet {
         client1.connect();
         client2.connect();
         client3.connect();
-        client3.withdraw("abn","Netherlands", 20)
+        client1.withdraw("abn","Netherlands", 20)
         client1.balance("abn", "Germany")
     }
 }

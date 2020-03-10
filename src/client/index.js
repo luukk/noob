@@ -5,7 +5,9 @@ class Client {
         console.log('constructor called');
         
         this.registerSchema = {
-            country
+            header: {
+                country
+            }
         }
     }
 
@@ -35,7 +37,9 @@ class Client {
     }
 
     withdraw(receiveBankName, receiveCountry, amount) {
-        const schema = { receiveBankName, receiveCountry, amount }
+        let schema = {}
+        schema.header = { receiveBankName, receiveCountry }
+        schema.body = amount
         schema.action = "withdraw"
 
         this.socket.emit('withdraw', schema);
@@ -45,7 +49,8 @@ class Client {
     }
 
     balance(receiveBankName, receiveCountry) {
-        const schema = { receiveBankName, receiveCountry }
+        let schema = {}
+        schema.header = { receiveBankName, receiveCountry }
         schema.action = "balance"
 
         this.socket.emit('balance', schema);
