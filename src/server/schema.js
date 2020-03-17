@@ -50,26 +50,6 @@ const schema = {
                 }          
             }
         }
-    },
-    deposit: {
-        header: {
-            receiveBankName: {
-                type: String,
-                required: true,
-                length: {
-                    min: 1,
-                    max: 50
-                }          
-            },
-            receiveCountry: {
-                type: String,
-                required: true,
-                length: {
-                    min: 1,
-                    max: 50
-                }          
-            }
-        }
     }
 };
 

@@ -28,7 +28,6 @@ io.on("connection", socket => {
             if(error !== null){                
                 return socket.emit('response', registerFailed); //error registering to room
             }
-            
             return socket.emit('response', registerSucces); //register successfull
         });
 
@@ -37,11 +36,6 @@ io.on("connection", socket => {
     socket.on("withdraw", withdrawBody => {
         const { receiveCountry } = withdrawBody.header        
         socket.to(receiveCountry).emit('withdraw', withdrawBody)
-    })
-
-    socket.on("deposit", depositBody => {
-        const { receiveCountry } = depositBody.header
-        socket.to(receiveCountry).emit('deposit', depositBody)
     })
 
     socket.on("balance", balanceBody => {

@@ -7,6 +7,5 @@
 * Or to run them concurrently - `npm run dev`
 
 # Production enviroment
-* Create docker image with `docker image build  -t <name>:<version> .`
-* Spin up docker container: `docker run --publish 8085:8085 -d <name>:<version>`
-
+* Pull docker image with: `docker pull nkvl1/noob`
+* Run docker container: `docker run --publish 8085:8085 -d nkvl1/noob:latest`
