@@ -4,34 +4,34 @@ const server = require("http").Server(app);
 const io = require("socket.io").listen(server);
 const middleware = require('./middleware')
 const messages = require('./messages')
+require('dotenv').config()
 
 io.on("connection", socket => {
     console.log("a user connected", socket.id);
 
     middleware(socket); //middleware handler
 
-    /**
-     * Socket handler for country registration
-     */
-    socket.on("register", registerbody => {
-        const { country } = registerbody.header
-        socket.countryInfo = country;
-        const { registerSucces, registerFailed, alreadyRegistered } = messages.register
+    const { registerSucces, registerFailed, alreadyRegistered } = messages.register
     
-        socket.join(country, error => {
-            const poolSize = io.sockets.adapter.rooms[country];
+    const ip = socket.handshake.address.split(':').slice(-1)[0]
+    const country = process.env[ip]
 
-            if(poolSize.length > 1) {
-                socket.leave(country);
-                return socket.emit('response', alreadyRegistered);
-            }
-            if(error !== null){                
-                return socket.emit('response', registerFailed); //error registering to room
-            }
-            return socket.emit('response', registerSucces); //register successfull
-        });
+    if (country === undefined) {
+        return socket.emit('response', registerFailed);
+    }
 
-    })
+    socket.join(country, error => {
+        const poolSize = io.sockets.adapter.rooms[country];
+
+        if(poolSize.length > 1) {
+            socket.leave(country);
+            return socket.emit('response', alreadyRegistered);
+        }
+        if(error !== null){                
+            return socket.emit('response', registerFailed); //error registering to room
+        }
+        return socket.emit('response', registerSucces); //register successfull
+    });
 
     socket.on("withdraw", withdrawBody => {
         const { receiveCountry } = withdrawBody.header        

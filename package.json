@@ -42,6 +42,7 @@
         "workbox-webpack-plugin": "^3.6.2"
     },
     "dependencies": {
+        "dotenv": "^8.2.0",
         "express": "^4.16.4",
         "idiom.js": "^1.0.0",
         "schema-validator": "^3.3.1",
