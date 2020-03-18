@@ -8,4 +8,4 @@ dist/
 /index.html
 build/
 package-lock.json
-yarn.lock
+
