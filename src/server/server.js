@@ -9,15 +9,15 @@ require('dotenv').config()
 io.on("connection", socket => {
     console.log("a user connected", socket.id);
 
-    middleware(socket); //middleware handler
+    middleware(socket); // middleware handler
 
-    const { registerSucces, registerFailed, alreadyRegistered } = messages.register
+    const { unknownIp, registerSucces, registerFailed, alreadyRegistered } = messages.register
     
     const ip = socket.handshake.address.split(':').slice(-1)[0]
     const country = process.env[ip]
 
     if (country === undefined) {
-        return socket.emit('response', registerFailed);
+        return socket.emit('response', unknownIp);
     }
 
     socket.join(country, error => {
@@ -28,9 +28,9 @@ io.on("connection", socket => {
             return socket.emit('response', alreadyRegistered);
         }
         if(error !== null){                
-            return socket.emit('response', registerFailed); //error registering to room
+            return socket.emit('response', registerFailed); // error registering to room
         }
-        return socket.emit('response', registerSucces); //register successfull
+        return socket.emit('response', registerSucces); // register successfull
     });
 
     socket.on("withdraw", withdrawBody => {
@@ -43,7 +43,7 @@ io.on("connection", socket => {
         socket.to(receiveCountry).emit('balance', balanceBody)
     })
 
-    socket.on("disconnect", function() {
+    socket.on("disconnect", () => {
         console.log("user disconnected");
     });
 });
