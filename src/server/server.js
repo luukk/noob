@@ -38,6 +38,11 @@ io.on("connection", socket => {
         socket.to(receiveCountry).emit('withdraw', withdrawBody)
     })
 
+    socket.on('response', responseBody => {
+        const { receiveCountry } = withdrawBody.header        
+        socket.to(receiveCountry).emit('reponse', responseBody)
+    })
+
     socket.on("balance", balanceBody => {
         const { receiveCountry } = balanceBody.header
         socket.to(receiveCountry).emit('balance', balanceBody)
