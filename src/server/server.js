@@ -15,7 +15,7 @@ io.on("connection", socket => {
     
     const ip = socket.handshake.address.split(':').slice(-1)[0]
     const country = process.env[ip]
-
+    console.log(ip)
     if (country === undefined) {
         return socket.emit('response', unknownIp);
     }
@@ -36,6 +36,11 @@ io.on("connection", socket => {
     socket.on("withdraw", withdrawBody => {
         const { receiveCountry } = withdrawBody.header        
         socket.to(receiveCountry).emit('withdraw', withdrawBody)
+    })
+
+    socket.on('response', responseBody => {
+        const { receiveCountry } = responseBody.header        
+        socket.to(receiveCountry).emit('response', responseBody)
     })
 
     socket.on("balance", balanceBody => {

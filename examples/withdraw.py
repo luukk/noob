@@ -2,7 +2,7 @@ import socketio
 
 io = socketio.Client()
 
-io.connect('http://localhost:8085')
+io.connect('http://192.168.1.145:8085')
 
 @io.event
 def response(data):
@@ -14,8 +14,10 @@ def withdraw(data):
     print(data)
     response = {
         'header': { 
-            'receiveCountry': data.receiveCountry,
-            'receiveBank': data.receiveBank,
+            'originCountry': 'TE0',
+            'originBank': 'INGB',
+            'receiveCountry': data['header']['originCountry'],
+            'receiveBank': data['header']['originBank'],
             'action': 'withdraw'
         },
         'body': {
@@ -24,10 +26,13 @@ def withdraw(data):
         }
     }
     io.emit('response', response)
+    # io.emit('withdraw', response) werkt dus wel
 
 withdrawBody = {
     'header': { 
-        'receiveCountry': 'Nederland',
+	    'originCountry': 'TE0',
+	    'originBank': 'INGB',
+        'receiveCountry': 'TE1',
         'receiveBank': 'INGB'
     },
     'body': {
